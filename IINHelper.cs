@@ -81,20 +81,21 @@ public class IINHelper
 			c2 = c2 + digits[i] * checkDigits2[i];
 		}
 		var c = c1 % 11;
-		if (c1 == 10)
-		{
-			if (c2 % 10 == 10)
-			{
-				this.ErrorMessage = "Некорректный ИИН. Данный ИИН не используется";
-				return this;
-			}
-			c = c2 % 10;
-		}
+		var c = c1 % 11;
+                if (c == 10)
+	        {
+		    if (c2 % 11 == 10)
+		    {
+		        this.ErrorMessage = "Некорректный ИИН. Данный ИИН не используется";
+		        return this;
+		    }
+		    c = c2 % 11;
+	        }
 
-		if (c != digits[11])
+                if (c != digits[11])
 		{
-			this.ErrorMessage = "Некорректный ИИН. Не совпадает контрольный разряд";
-			return this;
+		    this.ErrorMessage = "Некорректный ИИН. Не совпадает контрольный разряд";
+		    return this;
 		}
 
 		this.IsValid = true;
